@@ -3,10 +3,26 @@
  * Enhanced JavaScript with Animations
  */
 
-const CONFIG = {};
+const CONFIG = {
+  // Supabase Configuration
+  // Replace these with your actual Supabase project credentials
+  supabaseUrl: 'YOUR_SUPABASE_URL',
+  supabaseKey: 'YOUR_SUPABASE_ANON_KEY'
+};
+
+// Initialize Supabase Client
+let supabase = null;
 
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
+  // Initialize Supabase
+  if (window.supabase && CONFIG.supabaseUrl !== 'YOUR_SUPABASE_URL') {
+    supabase = window.supabase.createClient(CONFIG.supabaseUrl, CONFIG.supabaseKey);
+    console.log('✅ Supabase client initialized');
+  } else {
+    console.warn('⚠️ Supabase not configured. Please update CONFIG in main.js');
+  }
+
   initLoadingScreen();
 });
 
@@ -306,23 +322,43 @@ function initRSVPForm() {
     };
 
     try {
-      const response = await fetch('/api/rsvp', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-      });
+      // Check if Supabase is configured
+      if (!supabase) {
+        showMessage(messageDiv, 'لم يتم تكوين قاعدة البيانات. يرجى التحقق من الإعدادات', 'error');
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+        return;
+      }
 
-      const result = await response.json();
+      // Insert data into Supabase
+      const { data: insertData, error } = await supabase
+        .from('rsvps')
+        .insert([{
+          name: data.name,
+          attending: data.attending,
+          number_of_guests: data.attending === 'yes' ? data.numberOfGuests : null,
+          message: data.message || null
+        }])
+        .select();
 
-      if (result.success) {
-        showMessage(messageDiv, result.message, 'success');
+      if (error) {
+        console.error('Supabase error:', error);
+        showMessage(messageDiv, 'حدث خطأ أثناء حفظ البيانات: ' + error.message, 'error');
+      } else {
+        const successMessage = data.attending === 'yes'
+          ? 'شكراً لتأكيد حضوركم! نتطلع لرؤيتكم 💕'
+          : 'شكراً لإعلامنا. نأمل أن نراكم في مناسبة قادمة';
+
+        showMessage(messageDiv, successMessage, 'success');
         form.reset();
         guestsGroup.classList.remove('show');
-        celebrate();
-      } else {
-        showMessage(messageDiv, result.message, 'error');
+
+        if (data.attending === 'yes') {
+          celebrate();
+        }
       }
     } catch (error) {
+      console.error('Error:', error);
       showMessage(messageDiv, 'حدث خطأ، يرجى المحاولة مرة أخرى', 'error');
     } finally {
       submitBtn.innerHTML = originalText;
