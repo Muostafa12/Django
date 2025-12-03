@@ -1,0 +1,9 @@
+{
+  "name": "wedding-invitation-netlify-functions",
+  "version": "1.0.0",
+  "description": "Netlify Functions for Wedding Invitation",
+  "main": "index.js",
+  "dependencies": {
+    "mongodb": "^6.3.0"
+  }
+}

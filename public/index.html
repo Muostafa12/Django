@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5" />
+    <title>دعوة زفاف - مصطفى و ملك</title>
+    <meta
+      name="description"
+      content="دعوة لحضور حفل زفاف مصطفى محمود و ملك محمد"
+    />
+
+    <!-- Mobile Optimizations -->
+    <meta name="theme-color" content="#722f37" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <!-- Google Fonts - Arabic -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@300;400;500;700&family=Aref+Ruqaa:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+      <div class="loading-content">
+        <div class="loading-hearts">
+          <span>💕</span>
+        </div>
+        <div class="loading-names">م & م</div>
+        <div class="loading-text">جاري التحميل...</div>
+        <div class="loading-bar">
+          <div class="loading-progress"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Confetti Container -->
+    <div class="confetti-container" id="confettiContainer"></div>
+
+    <!-- Floating Hearts Background -->
+    <div class="hearts-container" id="heartsContainer"></div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <div class="bismillah">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</div>
+        <div class="quran-verse">
+          "وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا
+          لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً"
+        </div>
+        <div class="invitation-text">نتشرف</div>
+        <div class="invitation-text">بدعوتكم لحضور حفل زفاف</div>
+
+        <div class="couple-names">
+          <div class="name groom">
+            <span class="name-text">مصطفى محمود</span>
+          </div>
+          <div class="heart-divider">
+            <i class="fas fa-heart"></i>
+          </div>
+          <div class="name bride">
+            <span class="name-text">ملك محمد</span>
+          </div>
+        </div>
+
+        <div class="scroll-indicator">
+          <i class="fas fa-chevron-down"></i>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section Divider -->
+    <div class="section-divider dark" aria-hidden="true">
+      <span class="section-divider-icon">✦</span>
+    </div>
+
+    <!-- Countdown Section -->
+    <!--
+    To change the wedding date, edit the data-date attribute below.
+    Format: YYYY-MM-DDTHH:MM:SS (24-hour format)
+    Example: 2025-02-14T19:00:00 means February 14, 2025 at 7:00 PM
+  -->
+    <section
+      class="countdown-section"
+      id="countdown"
+      data-date="2026-05-01T19:00:00"
+      data-date-text="الجمعة، ١ مايو ٢٠٢٦"
+      data-time-text="الساعة السابعة مساءً"
+      aria-label="العد التنازلي للزفاف"
+    >
+      <div class="section-container">
+        <div class="wedding-date-time reveal">
+          <div class="date-display">
+            <i class="far fa-calendar-alt" aria-hidden="true"></i>
+            <span id="dateText">الجمعة، ١ مايو ٢٠٢٦</span>
+          </div>
+          <div class="time-display">
+            <i class="far fa-clock" aria-hidden="true"></i>
+            <span id="timeText">الساعة السابعة مساءً</span>
+          </div>
+        </div>
+
+        <div
+          class="countdown-timer reveal"
+          id="countdownTimer"
+          role="timer"
+          aria-live="polite"
+        >
+          <div class="countdown-item reveal-scale stagger-1">
+            <span class="countdown-value" id="days">00</span>
+            <span class="countdown-label">يوم</span>
+          </div>
+          <div class="countdown-separator" aria-hidden="true">:</div>
+          <div class="countdown-item reveal-scale stagger-2">
+            <span class="countdown-value" id="hours">00</span>
+            <span class="countdown-label">ساعة</span>
+          </div>
+          <div class="countdown-separator" aria-hidden="true">:</div>
+          <div class="countdown-item reveal-scale stagger-3">
+            <span class="countdown-value" id="minutes">00</span>
+            <span class="countdown-label">دقيقة</span>
+          </div>
+          <div class="countdown-separator" aria-hidden="true">:</div>
+          <div class="countdown-item reveal-scale stagger-4">
+            <span class="countdown-value" id="seconds">00</span>
+            <span class="countdown-label">ثانية</span>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="action-buttons reveal stagger-5">
+          <button
+            class="btn btn-calendar"
+            id="addToCalendar"
+            aria-label="إضافة إلى التقويم"
+          >
+            <i class="far fa-calendar-plus" aria-hidden="true"></i>
+            أضف للتقويم
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section Divider -->
+    <div class="section-divider" aria-hidden="true">
+      <span class="section-divider-icon">❧</span>
+    </div>
+
+    <!-- Event Details Section -->
+    <section class="details-section" id="details" aria-label="تفاصيل الحفل">
+      <div class="section-container">
+        <h2 class="section-title reveal">تفاصيل الحفل</h2>
+
+        <div class="event-info">
+          <div class="event-item reveal-left stagger-1">
+            <i class="fas fa-ring" aria-hidden="true"></i>
+            <div>
+              <strong>حفل الزفاف</strong>
+              <span>٧:٠٠ مساءً</span>
+            </div>
+          </div>
+          <div class="event-item reveal-right stagger-2">
+            <i class="fas fa-utensils" aria-hidden="true"></i>
+            <div>
+              <strong>حفل العشاء</strong>
+              <span>٩:٠٠ مساءً</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section Divider -->
+    <div class="section-divider dark" aria-hidden="true">
+      <span class="section-divider-icon">✧</span>
+    </div>
+
+    <!-- Special Message Section -->
+    <section
+      class="message-section"
+      id="message"
+      aria-label="رسالة من العروسين"
+    >
+      <div class="section-container">
+        <div class="special-message reveal stagger-1">
+          <div class="message-icon">
+            <i class="fas fa-heart" aria-hidden="true"></i>
+          </div>
+          <p class="message-text">
+            في هذا اليوم المميز، نود أن نشارككم فرحتنا وسعادتنا. حضوركم يضيف
+            لحفلنا بهجة وسرور، ونتطلع لقضاء أجمل الأوقات معكم.
+          </p>
+          <p class="message-signature">مصطفى و ملك</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Location Section with Map -->
+    <section class="location-section" id="location" aria-label="موقع الحفل">
+      <div class="section-container">
+        <h2 class="section-title reveal">موقع الحفل</h2>
+
+        <div class="location-content">
+          <div class="venue-info reveal-right stagger-1">
+            <h3>
+              <i class="fas fa-map-marker-alt" aria-hidden="true"></i> دار
+              مناسبات النخيل
+            </h3>
+            <p>القاهرة الجديدة</p>
+            <a
+              href="https://maps.google.com/?q=30.05326937491915,31.42973027555412"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn btn-directions"
+              aria-label="الحصول على الاتجاهات إلى موقع الحفل"
+            >
+              <i class="fas fa-directions" aria-hidden="true"></i>
+              الاتجاهات
+            </a>
+          </div>
+
+          <div class="map-container reveal-left stagger-2">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4123.428778265502!2d31.42973027555412!3d30.05326937491915!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14583d8c868aa98b%3A0xc86518297d6529f8!2z2K_Yp9ixINmF2YbYp9iz2KjYp9iqINin2YTZhtiu2YrZhA!5e1!3m2!1sen!2seg!4v1763847475531!5m2!1sen!2seg"
+              width="100%"
+              height="280"
+              style="border: 0; border-radius: 12px"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              title="خريطة موقع الحفل - دار مناسبات النخيل"
+            >
+            </iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section Divider -->
+    <div class="section-divider dark" aria-hidden="true">
+      <span class="section-divider-icon">♡</span>
+    </div>
+
+    <!-- RSVP Section -->
+    <section class="rsvp-section" id="rsvp" aria-label="تأكيد الحضور">
+      <div class="section-container">
+        <h2 class="section-title reveal">تأكيد الحضور</h2>
+        <p class="section-subtitle reveal stagger-1">يسعدنا تأكيد حضوركم</p>
+
+        <form
+          class="rsvp-form reveal stagger-2"
+          id="rsvpForm"
+          aria-label="نموذج تأكيد الحضور"
+        >
+          <div class="form-group">
+            <label for="guestName" class="visually-hidden">الاسم الكريم</label>
+            <input
+              type="text"
+              id="guestName"
+              name="name"
+              required
+              placeholder="الاسم الكريم"
+              autocomplete="name"
+              aria-required="true"
+            />
+          </div>
+
+          <div class="form-group">
+            <fieldset class="attendance-fieldset">
+              <legend class="visually-hidden">هل ستحضر؟</legend>
+              <div
+                class="attendance-buttons"
+                role="radiogroup"
+                aria-label="تأكيد الحضور"
+              >
+                <label class="attendance-btn">
+                  <input
+                    type="radio"
+                    name="attending"
+                    value="yes"
+                    required
+                    aria-required="true"
+                  />
+                  <span
+                    ><i class="fas fa-check" aria-hidden="true"></i> سأحضر</span
+                  >
+                </label>
+                <label class="attendance-btn">
+                  <input type="radio" name="attending" value="no" />
+                  <span
+                    ><i class="fas fa-times" aria-hidden="true"></i> لن
+                    أحضر</span
+                  >
+                </label>
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="form-group guests-count" id="guestsCountGroup">
+            <label for="numberOfGuests" class="visually-hidden"
+              >عدد الحضور</label
+            >
+            <select
+              id="numberOfGuests"
+              name="numberOfGuests"
+              aria-label="عدد الحضور"
+            >
+              <option value="1">شخص واحد</option>
+              <option value="2">شخصان</option>
+              <option value="3">٣ أشخاص</option>
+              <option value="4">٤ أشخاص</option>
+              <option value="5">٥ أشخاص</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="guestMessage" class="visually-hidden"
+              >رسالة للعروسين</label
+            >
+            <textarea
+              id="guestMessage"
+              name="message"
+              rows="2"
+              placeholder="رسالة للعروسين (اختياري)"
+              aria-label="رسالة للعروسين (اختياري)"
+              maxlength="500"
+            ></textarea>
+          </div>
+
+          <button
+            type="submit"
+            class="btn btn-submit"
+            aria-label="إرسال تأكيد الحضور"
+          >
+            <i class="fas fa-paper-plane" aria-hidden="true"></i>
+            إرسال
+          </button>
+        </form>
+
+        <div
+          class="form-message"
+          id="rsvpMessage"
+          role="alert"
+          aria-live="polite"
+        ></div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="couple-initials reveal-scale">م & م</div>
+        <p class="footer-names reveal stagger-1">مصطفى محمود ♥ ملك محمد</p>
+        <p class="footer-date reveal stagger-2">١٤ فبراير ٢٠٢٥</p>
+        <p class="footer-message reveal stagger-3">نتطلع لرؤيتكم</p>
+      </div>
+    </footer>
+
+    <!-- Simple Navigation -->
+    <nav class="simple-nav" id="simpleNav" aria-label="التنقل الرئيسي">
+      <a href="#home" title="الرئيسية" aria-label="الرئيسية">
+        <i class="fas fa-home" aria-hidden="true"></i>
+        <span>الرئيسية</span>
+      </a>
+      <a href="#countdown" title="الموعد" aria-label="الموعد">
+        <i class="fas fa-clock" aria-hidden="true"></i>
+        <span>الموعد</span>
+      </a>
+      <a href="#location" title="الموقع" aria-label="الموقع">
+        <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+        <span>الموقع</span>
+      </a>
+      <a href="#rsvp" title="تأكيد الحضور" aria-label="تأكيد الحضور">
+        <i class="fas fa-check-circle" aria-hidden="true"></i>
+        <span>الحضور</span>
+      </a>
+    </nav>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+  </body>
+</html>
